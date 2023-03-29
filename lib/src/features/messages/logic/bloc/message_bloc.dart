@@ -9,7 +9,6 @@ import 'package:auth/src/features/messages/logic/enum/message_type.dart';
 import 'package:auth/src/features/messages/logic/models/message.dart';
 import 'package:auth/src/features/messages/logic/models/typing.dart';
 import 'package:auth/src/features/messages/logic/repository/message_repository.dart';
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -96,7 +95,7 @@ class MessageBloc extends Bloc<MessageEvent, MessageState> {
       (data) {
         final typing = Typing.fromJson(data);
 
-        if (!_isCurrentPartner([typing.room?.id, typing.user.id])) {
+        if (!_isCurrentPartner([typing.user.id])) {
           return;
         }
 

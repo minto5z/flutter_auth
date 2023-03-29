@@ -6,7 +6,6 @@ import 'package:auth/src/features/messages/logic/bloc/message_bloc.dart';
 import 'package:auth/src/features/messages/logic/enum/message_type.dart';
 import 'package:auth/src/features/messages/logic/models/message.dart';
 import 'package:auth/src/features/messages/views/screens/direct_message_screen.dart';
-import 'package:auth/src/features/room/logic/models/room.dart';
 import 'package:auth/src/shared/views/widgets/dialog/confirm_dialog_widget.dart';
 import 'package:auth/src/shared/views/widgets/main_text_field.dart';
 import 'package:auth/src/shared/views/widgets/typing_indicator.dart';
@@ -17,7 +16,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 class Messages extends StatefulWidget {
-  final Room? room;
   final User? to;
   final MessageType type;
   final MessageBloc bloc;
@@ -26,7 +24,6 @@ class Messages extends StatefulWidget {
 
   Messages({
     Key? key,
-    this.room,
     this.to,
     required this.type,
     required this.bloc,
@@ -49,8 +46,7 @@ class _MessagesState extends State<Messages> {
 
   bool _isTyping = false;
 
-  String get partnerHistoryId =>
-      (widget.room != null ? widget.room?.id : widget.to?.username) as String;
+  String get partnerHistoryId => (widget.to?.username) as String;
 
   @override
   void initState() {

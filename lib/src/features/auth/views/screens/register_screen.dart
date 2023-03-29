@@ -8,7 +8,6 @@ import 'package:auth/src/shared/views/widgets/next_button.dart';
 import 'package:auth/src/shared/views/widgets/scrollable_form.dart';
 import 'package:auth/src/shared/views/widgets/underlined_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatefulWidget {
