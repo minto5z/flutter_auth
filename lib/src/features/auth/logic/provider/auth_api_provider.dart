@@ -60,56 +60,6 @@ class AuthAPIProvider {
     return User.fromJson(response.data);
   }
 
-  Future<Tokens> loginWithFacebook(String? accessToken) {
-    return _socialLogin(
-      provider: 'facebook',
-      accessToken: accessToken,
-    );
-  }
-
-  Future<Tokens> loginWithGoogle(String? accessToken) {
-    return _socialLogin(
-      provider: 'google',
-      accessToken: accessToken,
-    );
-  }
-
-  Future<Tokens> loginWithApple({
-    required String? identityToken,
-    required String authorizationCode,
-    String? givenName,
-    String? familyName,
-    String? type,
-  }) {
-    return _socialLogin(
-      provider: 'apple',
-      accessToken: identityToken,
-      authorizationCode: authorizationCode,
-      type: type,
-      name: '$givenName $familyName',
-    );
-  }
-
-  Future<Tokens> _socialLogin({
-    required String provider,
-    required String? accessToken,
-    String? authorizationCode,
-    String? type,
-    String? name,
-  }) async {
-    final response = await api.post(
-      '/auth/$provider-login',
-      data: {
-        'name': name,
-        'accessToken': accessToken,
-        'authorizationCode': authorizationCode,
-        'type': type,
-      },
-    );
-
-    return Tokens.fromJson(response.data);
-  }
-
   Future<Tokens> loginWithRefreshToken(String? refreshToken) async {
     final response = await api.post(
       '/auth/refresh-token',

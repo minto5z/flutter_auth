@@ -78,7 +78,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           height: 70,
                         ),
                         _form(node, context),
-                        _thirdPartySignInButtons(context),
                       ],
                     ),
                   ],
@@ -151,37 +150,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  Widget _thirdPartySignInButtons(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          height: 30,
-        ),
-        SignInButton(
-          Buttons.AppleDark,
-          text: "Sign up with Apple",
-          onPressed: () => _registerWithApple(context),
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        SignInButton(
-          Buttons.Facebook,
-          text: "Sign up with Facebook",
-          onPressed: () => _registerWithFacebook(context),
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        SignInButton(
-          Buttons.GoogleDark,
-          text: "Sign up with Google",
-          onPressed: () => _registerWithGoogle(context),
-        )
-      ],
-    );
-  }
-
   _registerWithAccount(BuildContext context) async {
     final bloc = context.read<AuthCubit>();
 
@@ -192,24 +160,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
         _email,
       );
     });
-  }
-
-  _registerWithFacebook(BuildContext context) {
-    final bloc = context.read<AuthCubit>();
-
-    return _registerWith(context, () => bloc.loginWithFacebook());
-  }
-
-  _registerWithGoogle(BuildContext context) {
-    final bloc = context.read<AuthCubit>();
-
-    return _registerWith(context, () => bloc.loginWithGoogle());
-  }
-
-  _registerWithApple(BuildContext context) {
-    final bloc = context.read<AuthCubit>();
-
-    return _registerWith(context, () => bloc.loginWithApple());
   }
 
   _registerWith(BuildContext context, Future<void> Function() method) async {

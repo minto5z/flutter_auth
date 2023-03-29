@@ -10,8 +10,6 @@ import 'package:auth/src/shared/views/widgets/scrollable_form.dart';
 import 'package:auth/src/shared/views/widgets/underlined_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_signin_button/button_list.dart';
-import 'package:flutter_signin_button/button_view.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -80,7 +78,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           height: 70,
                         ),
                         _form(node, context),
-                        _thirdPartySignInButtons(context),
                       ],
                     ),
                   ],
@@ -142,38 +139,6 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _thirdPartySignInButtons(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          height: 30,
-        ),
-        // if (Platform.isIOS)
-        SignInButton(
-          Buttons.AppleDark,
-          text: "Sign in with Apple",
-          onPressed: () => _loginWithApple(context),
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        SignInButton(
-          Buttons.Facebook,
-          text: "Sign in with Facebook",
-          onPressed: () => _loginWithFacebook(context),
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        SignInButton(
-          Buttons.GoogleDark,
-          text: "Sign in with Google",
-          onPressed: () => _loginWithGoogle(context),
-        )
-      ],
-    );
-  }
-
   _login(BuildContext context) {
     final bloc = context.read<AuthCubit>();
 
@@ -184,24 +149,6 @@ class _LoginScreenState extends State<LoginScreen> {
         _passwordController.text,
       ),
     );
-  }
-
-  _loginWithFacebook(BuildContext context) {
-    final bloc = context.read<AuthCubit>();
-
-    _loginWith(context, () => bloc.loginWithFacebook());
-  }
-
-  _loginWithGoogle(BuildContext context) {
-    final bloc = context.read<AuthCubit>();
-
-    _loginWith(context, () => bloc.loginWithGoogle());
-  }
-
-  _loginWithApple(BuildContext context) {
-    final bloc = context.read<AuthCubit>();
-
-    _loginWith(context, () => bloc.loginWithApple());
   }
 
   _loginWith(BuildContext context, Future<void> Function() method) async {
